@@ -1,18 +1,9 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WPF_InventoryListCreator.Code;
 using WPF_InventoryListCreator.Models;
 
@@ -23,6 +14,7 @@ namespace WPF_InventoryListCreator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         readonly int messageMiliSecAppearence = 4000;
         readonly Utile utile = new Utile();
         private List<Article> allArticles;
@@ -36,11 +28,11 @@ namespace WPF_InventoryListCreator
 
         #region event-handlers
 
-        private void btnUploadArticles_Click(object sender, RoutedEventArgs e)
+        private void BtnUploadArticles_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string filename = openFileDialog("Excel Files|*.xls;*.xlsx;*.xlsm");
+                string filename = OpenFileDialog("Excel Files|*.xls;*.xlsx;*.xlsm");
 
                 Mouse.OverrideCursor = Cursors.Wait;
 
@@ -50,17 +42,15 @@ namespace WPF_InventoryListCreator
             }
             catch (Exception ex)
             {
-
-                lblMessage.Content = ex.ToString();
-                Mouse.OverrideCursor = Cursors.Arrow;
+                HandleError(ex);
             }
         }
 
-        private void btnUploadScanner_Click(object sender, RoutedEventArgs e)
+        private void BtnUploadScanner_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string filename = openFileDialog("CSV Files (*.csv)|*.csv");
+                string filename = OpenFileDialog("CSV Files (*.csv)|*.csv");
                 Mouse.OverrideCursor = Cursors.Wait;
 
                 if (!string.IsNullOrEmpty(filename))
@@ -69,13 +59,11 @@ namespace WPF_InventoryListCreator
             }
             catch (Exception ex)
             {
-
-                lblMessage.Content = ex.ToString();
-                Mouse.OverrideCursor = Cursors.Arrow;
+                HandleError(ex);
             }
         }
 
-        private void btnStart_Click(object sender, RoutedEventArgs e)
+        private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -85,12 +73,13 @@ namespace WPF_InventoryListCreator
                 if (allArticles.Count == 0)
                     throw new UserInfoException("Inventur-Scanner Datei nicht vorhanden. Bitte Inventur-Scanner hochladen!");
 
-                Mouse.OverrideCursor = Cursors.Wait;
 
-                string filename = openSaveDialog("", "");
+                string filename = OpenSaveDialog("", "");
 
                 if (!string.IsNullOrEmpty(filename))
                 {
+                    Mouse.OverrideCursor = Cursors.Wait;
+
                     utile.CreateInventoryList(allArticles, allItems);
 
                     utile.ExportInventoryList(allItems, filename);
@@ -109,15 +98,13 @@ namespace WPF_InventoryListCreator
             }
             catch (Exception ex)
             {
-
-                lblMessage.Content = ex.ToString();
-                Mouse.OverrideCursor = Cursors.Arrow;
+                HandleError(ex);
             }
         }
 
         #endregion
 
-        private string openFileDialog(string filter)
+        private string OpenFileDialog(string filter)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -128,27 +115,42 @@ namespace WPF_InventoryListCreator
 
             if (openFileDialog.ShowDialog() == true)
             {
-                ShowMessage(openFileDialog.FileName);
                 return openFileDialog.FileName;
             }
             return null;
         }
 
-        private string openSaveDialog(string filter, string name)
+        private string OpenSaveDialog(string filter, string name)
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            saveFileDialog1.Title = "Inventur speicherm";
-            saveFileDialog1.CheckPathExists = true;
-            saveFileDialog1.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
-            saveFileDialog1.FilterIndex = 2;
-            saveFileDialog1.RestoreDirectory = true;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Title = "Inventur speichern",
+                CheckPathExists = true,
+                Filter = "Excel Files|*.xls;*.xlsx;*.xlsm",
+                FilterIndex = 2,
+                RestoreDirectory = true
+            };
 
             if (saveFileDialog1.ShowDialog() == true)
             {
                 return saveFileDialog1.FileName;
             }
             return "";
+        }
+
+        private void HandleError(Exception ex)
+        {
+            try
+            {
+                Mouse.OverrideCursor = Cursors.Arrow;
+                logger.Error(ex);
+                ShowMessage("Es ist ein Fehler aufgetreten!");
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private async void ShowMessage(string message)
@@ -161,7 +163,7 @@ namespace WPF_InventoryListCreator
             }
             catch (Exception ex)
             {
-                //logger.Error(ex);
+                HandleError(ex);
             }
         }
     }

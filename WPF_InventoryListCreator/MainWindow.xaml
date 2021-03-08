@@ -18,10 +18,10 @@
             <materialDesign:Card Padding="32" Margin="16">
                 <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}">Inventur Liste Erstellen</TextBlock>
             </materialDesign:Card>
-            <Button Name="btnUploadArticles" Content="Artikelliste hochladen" Background="DarkOliveGreen" BorderBrush="DarkOliveGreen" Width="auto" Margin="20" Click="btnUploadArticles_Click"/>
-            <Button Name="btnUploadScanner" Content="Scanner hochladen" Background="DarkOliveGreen" BorderBrush="DarkOliveGreen" Width="auto" Margin="20" Click="btnUploadScanner_Click"/>
+            <Button Name="btnUploadArticles" Content="Artikelliste hochladen" Background="DarkOliveGreen" BorderBrush="DarkOliveGreen" Width="auto" Margin="20" Click="BtnUploadArticles_Click"/>
+            <Button Name="btnUploadScanner" Content="Scanner hochladen" Background="DarkOliveGreen" BorderBrush="DarkOliveGreen" Width="auto" Margin="20" Click="BtnUploadScanner_Click"/>
 
-            <Button x:Name="btnStart" Content="start" Width="auto" Background="Black" BorderBrush="Black" Margin="20" Click="btnStart_Click"/>
+            <Button x:Name="btnStart" Content="start" Width="auto" Background="Black" BorderBrush="Black" Margin="20" Click="BtnStart_Click"/>
         </WrapPanel>
         <ScrollViewer>
             <Label  x:Name="lblMessage" Content="..." HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="Auto"  VerticalAlignment="Center" Width="Auto"/>

@@ -17,30 +17,6 @@ namespace WPF_InventoryListCreator.Code
     {
         public List<Article> LoadArticles(string filename)
         {
-            //Excel.Application xlApp = new Excel.Application();
-            //Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(filename, ReadOnly: true);
-            //Excel._Worksheet xlWorksheet = (Excel._Worksheet)xlWorkbook.Sheets[1];
-            //Excel.Range xlRange = xlWorksheet.UsedRange;
-            //object[,] values = xlRange.Value2;
-
-
-            //List<Article> results = new List<Article>();
-
-            //for (int i = 2; i <= values.GetLength(0); i++)
-            //{
-            //    results.Add(new Article
-            //    {
-            //        Number = values[i, 1]?.ToString(),
-            //        Description = values[i, 2]?.ToString(),
-            //        BatchID = values[i, 3]?.ToString()
-            //    });
-            //}
-
-            //xlWorkbook.Close();
-            //Marshal.FinalReleaseComObject(xlWorkbook);
-            //xlApp.Quit();
-            //Marshal.FinalReleaseComObject(xlApp);
-
             List<Article> results = new List<Article>();
 
             using (FileStream stream = File.Open(filename, FileMode.Open))
@@ -64,8 +40,6 @@ namespace WPF_InventoryListCreator.Code
                     });
                 }
             }
-
-
 
             return results;
         }
@@ -107,6 +81,7 @@ namespace WPF_InventoryListCreator.Code
         internal void ExportInventoryList(List<InventoryItem> allItems, string filename)
         {
             var table = ConvertToDataTable(allItems);
+
             GenerateExcel(table, filename);
         }
 
@@ -136,6 +111,7 @@ namespace WPF_InventoryListCreator.Code
             Excel.Workbook excelWorkBook = excelApp.Workbooks.Add();
             Excel._Worksheet xlWorksheet = excelWorkBook.Sheets[1];
             Excel.Range xlRange = xlWorksheet.UsedRange;
+
             foreach (DataTable table in dataSet.Tables)
             {
                 //Add a new worksheet to workbook with the Datatable name  
@@ -159,6 +135,7 @@ namespace WPF_InventoryListCreator.Code
             }
 
             // excelWorkBook.Save(); -> this is save to its default location  
+            excelApp.DisplayAlerts = false;
             excelWorkBook.SaveAs(path); // -> this will do the custom  
             excelWorkBook.Close();
             excelApp.Quit();
