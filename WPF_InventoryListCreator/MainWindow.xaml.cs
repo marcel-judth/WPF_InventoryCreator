@@ -38,6 +38,8 @@ namespace WPF_InventoryListCreator
 
                 if (!string.IsNullOrEmpty(filename))
                     allArticles = utile.LoadArticles(filename);
+
+                ShowMessage("Artikel hochgeladen!");
                 Mouse.OverrideCursor = Cursors.Arrow;
             }
             catch (Exception ex)
@@ -55,6 +57,8 @@ namespace WPF_InventoryListCreator
 
                 if (!string.IsNullOrEmpty(filename))
                     allItems = utile.LoadInventoryItems(filename);
+
+                ShowMessage("Scanner hochgeladen!");
                 Mouse.OverrideCursor = Cursors.Arrow;
             }
             catch (Exception ex)

@@ -41,6 +41,8 @@ namespace WPF_InventoryListCreator.Code
                 }
             }
 
+            SaveArticlesToSettings(results);
+
             return results;
         }
 
