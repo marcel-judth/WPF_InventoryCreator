@@ -1,0 +1,31 @@
+﻿<Window x:Class="WPF_InventoryListCreator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Inventur" Height="450" Width="550"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <materialDesign:Card Padding="32" Margin="16">
+                <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}">Inventur Liste Erstellen</TextBlock>
+            </materialDesign:Card>
+            <Button Name="btnUploadArticles" Content="Artikelliste hochladen" Background="DarkOliveGreen" BorderBrush="DarkOliveGreen" Width="auto" Margin="20" Click="btnUploadArticles_Click"/>
+            <Button Name="btnUploadScanner" Content="Scanner hochladen" Background="DarkOliveGreen" BorderBrush="DarkOliveGreen" Width="auto" Margin="20" Click="btnUploadScanner_Click"/>
+
+            <Button x:Name="btnStart" Content="start" Width="auto" Background="Black" BorderBrush="Black" Margin="20" Click="btnStart_Click"/>
+        </WrapPanel>
+        <ScrollViewer>
+            <Label  x:Name="lblMessage" Content="..." HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="Auto"  VerticalAlignment="Center" Width="Auto"/>
+        </ScrollViewer>
+    </StackPanel>
+
+</Window>
