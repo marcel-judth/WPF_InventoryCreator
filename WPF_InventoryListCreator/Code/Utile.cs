@@ -90,14 +90,14 @@ namespace WPF_InventoryListCreator.Code
         public DataTable ConvertToDataTable(List<InventoryItem> models)
         {
             DataTable table = new DataTable();
-            table.Columns.Add("Artikelnummer", typeof(int));
+            table.Columns.Add("Artikelnummer", typeof(string));
             table.Columns.Add("Menge1", typeof(string));
             table.Columns.Add("Inventurdatum", typeof(string));
             table.Columns.Add("Zahlliste", typeof(string));
             table.Columns.Add("Arbeitnehmer", typeof(string));
 
             foreach (var item in models)
-                table.Rows.Add(item.ArticleNr, item.Quantity, item.Date, "", item.BatchID);
+                table.Rows.Add(item.article.Number, item.Quantity, item.Date, "", item.BatchID);
 
             return table;
         }
@@ -149,7 +149,7 @@ namespace WPF_InventoryListCreator.Code
 
             foreach (var item in allItems)
             {
-                var article = allArticles.FirstOrDefault(a => a.BatchID?.ToLower() == item.BatchID?.ToLower());
+                var article = allArticles.FirstOrDefault(a => a.BatchID?.ToLower() == item.BatchID?.ToLower() && a.Number.StartsWith(item.ArticleNr));
 
                 item.article = article;
             }
