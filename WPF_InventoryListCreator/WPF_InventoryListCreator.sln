@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_InventoryListCreator", 
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "InventoryInstaller", "..\InventoryInstaller\InventoryInstaller.wapproj", "{423857DE-35D2-4AF8-8B93-2A6A3E771B34}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup_Inventory", "..\Setup_Inventory\Setup_Inventory.vdproj", "{69AB2F19-F2E3-42A9-BE7E-09B07CE8EB6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,16 @@ Global
 		{423857DE-35D2-4AF8-8B93-2A6A3E771B34}.Release|x86.ActiveCfg = Release|x86
 		{423857DE-35D2-4AF8-8B93-2A6A3E771B34}.Release|x86.Build.0 = Release|x86
 		{423857DE-35D2-4AF8-8B93-2A6A3E771B34}.Release|x86.Deploy.0 = Release|x86
+		{69AB2F19-F2E3-42A9-BE7E-09B07CE8EB6C}.Debug|Any CPU.ActiveCfg = Debug
+		{69AB2F19-F2E3-42A9-BE7E-09B07CE8EB6C}.Debug|ARM.ActiveCfg = Debug
+		{69AB2F19-F2E3-42A9-BE7E-09B07CE8EB6C}.Debug|ARM64.ActiveCfg = Debug
+		{69AB2F19-F2E3-42A9-BE7E-09B07CE8EB6C}.Debug|x64.ActiveCfg = Debug
+		{69AB2F19-F2E3-42A9-BE7E-09B07CE8EB6C}.Debug|x86.ActiveCfg = Debug
+		{69AB2F19-F2E3-42A9-BE7E-09B07CE8EB6C}.Release|Any CPU.ActiveCfg = Release
+		{69AB2F19-F2E3-42A9-BE7E-09B07CE8EB6C}.Release|ARM.ActiveCfg = Release
+		{69AB2F19-F2E3-42A9-BE7E-09B07CE8EB6C}.Release|ARM64.ActiveCfg = Release
+		{69AB2F19-F2E3-42A9-BE7E-09B07CE8EB6C}.Release|x64.ActiveCfg = Release
+		{69AB2F19-F2E3-42A9-BE7E-09B07CE8EB6C}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

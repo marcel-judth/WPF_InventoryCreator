@@ -62,17 +62,17 @@ namespace WPF_InventoryListCreator.Code
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-                    var values = line.Split(';');
+                    var values = line.Split('\t');
 
-                    if (values.Length > 2)
+                    if (values.Length > 3)
                     {
                         results.Add(new InventoryItem
                         {
-                            Date = values[0],
-                            ArticleNr = values[1],
-                            BatchID = values[2],
-                            Quantity = values[3],
-                            Unit = values[4]
+                            ArticleNr = values[0],
+                            BatchID = values[1],
+                            Quantity = values[2],
+                            Unit = values[3],
+                            Date = DateTime.Now.ToString("dd.MM.yyyy")
                         });
                     }
                 }
@@ -138,7 +138,7 @@ namespace WPF_InventoryListCreator.Code
 
             // excelWorkBook.Save(); -> this is save to its default location  
             excelApp.DisplayAlerts = false;
-            excelWorkBook.SaveAs(path); // -> this will do the custom  
+            excelWorkBook.SaveCopyAs(path); // -> this will do the custom  
             excelWorkBook.Close();
             excelApp.Quit();
         }
@@ -149,7 +149,7 @@ namespace WPF_InventoryListCreator.Code
 
             foreach (var item in allItems)
             {
-                var article = allArticles.First(a => a.BatchID.ToLower().Equals(item.BatchID.ToLower()));
+                var article = allArticles.FirstOrDefault(a => a.BatchID?.ToLower() == item.BatchID?.ToLower());
 
                 item.article = article;
             }
