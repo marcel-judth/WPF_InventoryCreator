@@ -78,7 +78,7 @@ namespace WPF_InventoryListCreator
                     throw new UserInfoException("Inventur-Scanner Datei nicht vorhanden. Bitte Inventur-Scanner hochladen!");
 
 
-                string filename = OpenSaveDialog("", "");
+                string filename = OpenSaveDialog("CSV Files (*.csv)|*.csv", "Inventur speichern");
 
                 if (!string.IsNullOrEmpty(filename))
                 {
@@ -129,9 +129,9 @@ namespace WPF_InventoryListCreator
             SaveFileDialog saveFileDialog1 = new SaveFileDialog
             {
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                Title = "Inventur speichern",
+                Title = name,
                 CheckPathExists = true,
-                Filter = "Excel Files|*.xls;*.xlsx;*.xlsm",
+                Filter = filter,
                 FilterIndex = 2,
                 RestoreDirectory = true
             };

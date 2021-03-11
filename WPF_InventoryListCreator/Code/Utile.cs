@@ -82,9 +82,24 @@ namespace WPF_InventoryListCreator.Code
 
         internal void ExportInventoryList(List<InventoryItem> allItems, string filename)
         {
-            var table = ConvertToDataTable(allItems);
+            //var table = ConvertToDataTable(allItems);
 
-            GenerateExcel(table, filename);
+            //GenerateExcel(table, filename);
+
+            string csv = GenerateCSVString(allItems);
+
+            File.WriteAllText(filename, csv);
+        }
+
+        public string GenerateCSVString(List<InventoryItem> allItems)
+        {
+            var csv = new StringBuilder();
+            csv.AppendLine("Artikelnummer;Menge1;Inventurdatum;Zahlliste;Arbeitnehmer");
+
+            foreach (var item in allItems)
+                csv.AppendLine($"{item.article?.Number};{item.Quantity};{item.Date};;{item.BatchID}");
+
+            return csv.ToString();
         }
 
         public DataTable ConvertToDataTable(List<InventoryItem> models)
